@@ -8,16 +8,22 @@ class car:
         self.eng=engine
     def __str__(self):
         return f"A {self.mdl} {self.mk} from {self.yr} with {self.eng}"
+    #for specificlay other programmers or code readers ig, tells what it is and how to "make" it
+    def __repr__(self):
+        return f"car(\"{self.mk}\",\"{self.mdl}\",{self.yr},{repr(self.eng)})"
 class engine:
     def __init__(self,config,displacement,horspwr,torque):
         self.con,self.dis,self.hp,self.tq=config,displacement,horspwr,torque
     def __str__(self):
         return f"an engine with {self.hp} horsepower, {self.tq} torque, {self.dis} displacement, and a config of {self.con}."
+    def __repr__(self):
+        return f"engine(\"{self.con}\",{self.dis},{self.hp},{self.tq})"
     def ign(self):
         print("vroom vroom")
-engn=engine("v36.5","3.141596","456","0.1")
-mc=car("frog","toyadoy","4391",engn)
+engn=engine("v36.5",3.141596,456,0.1)
+mc=car("frog","toyadoy",4391,engn)
 print(mc)
+print(repr(mc))
 mc.eng.ign()
 #to acces a composite class, you have to call the item that holds the class^^ aka you need to call .eng to call .ign(), because .ign() isn't part mc
 #composite has other class, inheritance IS the other class
