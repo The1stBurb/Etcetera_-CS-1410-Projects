@@ -1,4 +1,5 @@
 import pygame as py
+import sys
 from random import randint
 py.init()
 X = 1000
@@ -9,11 +10,11 @@ font = py.font.SysFont(None, 50)
 # set the py window name
 py.display.set_caption('image')
 # create a surface object, image is drawn on it.
-back = py.image.load("flabby bird\\background.png").convert()
-brd = py.image.load("flabby bird\\bird.png").convert()
-grnd = py.image.load("flabby bird\\ground.png").convert()
-pip = py.image.load("flabby bird\\pipe.png").convert()
-fpip = py.transform.flip(py.image.load("flabby bird\\pipe.png").convert(),False,True)
+back = py.image.load("flabby bird\\background.png").convert_alpha()
+brd = py.image.load("flabby bird\\bird.png").convert_alpha()
+grnd = py.image.load("flabby bird\\ground.png").convert_alpha()
+pip = py.image.load("flabby bird\\pipe.png").convert_alpha()
+fpip = py.transform.flip(py.image.load("flabby bird\\pipe.png").convert_alpha(),False,True)
 class pipe:
     def __init__(self,x,y,g,sp):
         self.x,self.y,self.gp=x,y,randint(200,250)
@@ -43,7 +44,7 @@ class brrd:
         self.ys=0
         self.bp=0
         self.sc=0
-        self.t=[self.y for i in range(100)]
+        self.t=[self.y for i in range(50)]
     def dr(self,kd):
         # if self.ys<3:
         self.ys+=0.1
@@ -55,18 +56,21 @@ class brrd:
         self.t=self.t[1:]+[self.y]
 def drw(c=True):
     global hs
-    scrn.blit(back, (753, -500))
+    scrn.blit(back, (750, -500))
     scrn.blit(back, (0, -500))
-    for i in range(len(br.t)-1):
-        scrn.blit(brd, (br.x-(len(br.t)-2-i)*2, br.t[i]))
-    scrn.blit(brd, (br.x, br.y))
+    # for i in range(len(br.t)-1):
+    #     brd2=brd
+    #     brd2.set_alpha(i*50)
+    #     scrn.blit(brd2, (br.x-(len(br.t)-2-i)*10, br.t[i]))
+    scrn.blit(py.transform.rotate(brd, br.ys*-5),(br.x, br.y))
     d=False
     for a,i in enumerate(pps):
         # if i.x+160<0:
         #     pps.append(gn(randint(450,550)))
         i.dr()
         # scrn.blit(font.render(f"{br.y}\n{i.y-i.gp}\n{i.y}", True, (0,0,0)),(i.x,i.y))
-        if br.x+100>i.x and br.x<i.x+160 and c:
+        if br.x+75>i.x and br.x<i.x+130 and c:
+            # scrn.blit(font.render(f"in", True, (0,0,0)),(i.x,i.y))
             if (br.y<i.y-i.gp or br.y+70>i.y):
                 scrn.blit(font.render(f"YOU DIED", True, (255,0,0)),(450,500))
                 d=True
