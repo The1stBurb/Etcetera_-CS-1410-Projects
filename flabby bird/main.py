@@ -43,10 +43,10 @@ class brrd:
         self.ys=0
         self.bp=0
         self.sc=0
-        self.t=[self.y for i in range(10)]
+        self.t=[self.y for i in range(100)]
     def dr(self,kd):
-        if self.ys<3:
-            self.ys+=0.1
+        # if self.ys<3:
+        self.ys+=0.1
         if kd and self.bp<0:
             self.bp=10
             self.ys=-4
@@ -57,8 +57,8 @@ def drw(c=True):
     global hs
     scrn.blit(back, (753, -500))
     scrn.blit(back, (0, -500))
-    for i in range(len(br.t)):
-        scrn.blit(brd, (br.x-i*10, br.t[i]))
+    for i in range(len(br.t)-1):
+        scrn.blit(brd, (br.x-(len(br.t)-2-i)*2, br.t[i]))
     scrn.blit(brd, (br.x, br.y))
     d=False
     for a,i in enumerate(pps):
