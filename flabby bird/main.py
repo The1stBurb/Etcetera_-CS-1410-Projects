@@ -19,7 +19,7 @@ fpip = py.transform.flip(py.image.load("flabby bird\\pipe.png").convert_alpha(),
 class pipe:
     def __init__(self,x,y,g,sp):
         self.x,self.y,self.gp=x,y,randint(200,250)
-        self.sp=1+sp/10
+        self.sp=3+sp/10
         self.ck=False
         # self.p=pip
         # self.fp=fpip
@@ -68,7 +68,7 @@ def drw(rx,ry,spI):
     for a,i in enumerate(pps):
         # if i.x+160<0:
         #     pps.append(gn(randint(450,550)))
-        i.sp=1+(br.sc)/10
+        i.sp=2+(br.sc)/5
         i.dr()
         # scrn.blit(font.render(f"{br.y}\n{i.y-i.gp}\n{i.y}", True, (0,0,0)),(i.x,i.y))
         if br.x+75>i.x and br.x<i.x+130 and True:
@@ -89,7 +89,7 @@ def drw(rx,ry,spI):
     if br.sc>hs:
         hs=br.sc
     scrn.blit(font.render(f"Highscore: {hs}", True, (0,0,0)),(0,0))
-    scrn.blit(font.render(f"Score: {br.sc}  {spI}", True, (0,0,0)),(0,50))
+    scrn.blit(font.render(f"Score: {br.sc}", True, (0,0,0)),(0,50))
     scrn.blit(err,(rx,ry))
     scrn.blit(grnd, (0, 700))
     scrn.blit(grnd, (750, 700))
@@ -124,7 +124,7 @@ while run:
     status=True
     while (status):
         kd=False
-        if pc!=br.sc and t>30 or t>randint(10,11)*60:
+        if pc!=br.sc and t>60*2:# or t>randint(10,11)*60:
             t=0
             pps.append(gn(br.sc+spI,randint(100,150)))
         for i in py.event.get():
@@ -139,7 +139,7 @@ while run:
         if py.key.get_pressed()[py.K_LSHIFT] and br.ys<3:
             br.ys+=0.5
         br.dr(kd)
-        ux-=1+(br.sc+spI)/10
+        ux-=2+(br.sc+spI)/5
         scrn.fill((255, 255, 255))
         pc=br.sc
         drwd=drw(ux,uy,t)
