@@ -14,6 +14,7 @@ back = py.image.load("flabby bird\\background.png").convert_alpha()
 brd = py.image.load("flabby bird\\bird.png").convert_alpha()
 grnd = py.image.load("flabby bird\\ground.png").convert_alpha()
 pip = py.image.load("flabby bird\\pipe.png").convert_alpha()
+err=py.image.load("flabby bird\\erer.png").convert_alpha()
 fpip = py.transform.flip(py.image.load("flabby bird\\pipe.png").convert_alpha(),False,True)
 class pipe:
     def __init__(self,x,y,g,sp):
@@ -43,7 +44,7 @@ class brrd:
         self.y=100
         self.ys=0
         self.bp=0
-        self.sc=0
+        self.sc=20
         self.t=[self.y for i in range(50)]
     def dr(self,kd):
         # if self.ys<3:
@@ -54,7 +55,7 @@ class brrd:
         self.y+=self.ys
         self.bp-=1
         self.t=self.t[1:]+[self.y]
-def drw(c=True):
+def drw(rx,ry,spI):
     global hs
     scrn.blit(back, (750, -500))
     scrn.blit(back, (0, -500))
@@ -67,9 +68,10 @@ def drw(c=True):
     for a,i in enumerate(pps):
         # if i.x+160<0:
         #     pps.append(gn(randint(450,550)))
+        i.sp=1+(br.sc+spI)/10
         i.dr()
         # scrn.blit(font.render(f"{br.y}\n{i.y-i.gp}\n{i.y}", True, (0,0,0)),(i.x,i.y))
-        if br.x+75>i.x and br.x<i.x+130 and c:
+        if br.x+75>i.x and br.x<i.x+130 and True:
             # scrn.blit(font.render(f"in", True, (0,0,0)),(i.x,i.y))
             if (br.y<i.y-i.gp or br.y+70>i.y):
                 scrn.blit(font.render(f"YOU DIED", True, (255,0,0)),(450,500))
@@ -81,29 +83,39 @@ def drw(c=True):
             i.ck=False
             br.sc+=1
     # scrn.blit(brd)
+    cat=False
+    if br.x+75>rx and br.x-130<rx+100 and br.y>ry and br.y<ry+200:
+        cat=True
     if br.sc>hs:
         hs=br.sc
     scrn.blit(font.render(f"Highscore: {hs}", True, (0,0,0)),(0,0))
     scrn.blit(font.render(f"Score: {br.sc}", True, (0,0,0)),(0,50))
+    scrn.blit(err,(rx,ry))
     scrn.blit(grnd, (0, 700))
     scrn.blit(grnd, (750, 700))
     py.display.flip()
-    return "ded" if d else ""
+    return "ded" if d else ("cat" if cat else"")
 # py.display.flip()
 run=True
 hs=0
 br=brrd()
+ux=0
+uy=0
 while run:
-    pps=[gn(br.sc,-200)]
+    ux=randint(1500,2000)
+    uy=randint(0,500)
+    spI=0
+    pps=[gn(br.sc+spI,-200)]
     br=brrd()
-    drw()
+    drw(ux,uy,spI)
     t=7*60
+    pc=0
     status=True
     while (status):
         kd=False
-        if t>randint(7,8)*60:
+        if pc!=br.sc and t>60:#t>randint(4,5)*60 or 
             t=0
-            pps.append(gn(br.sc,randint(450,550)))
+            pps.append(gn(br.sc+spI,randint(450,550)))
         for i in py.event.get():
             if i.type == py.QUIT:
                 status = False
@@ -111,13 +123,24 @@ while run:
                 if i.key==py.K_SPACE:
                     kd=True
         br.dr(kd)
+        ux-=1+(br.sc+spI)/10
         scrn.fill((255, 255, 255))
-        if drw()=="ded":
+        pc=br.sc
+        drwd=drw(ux,uy,pc)
+        if drwd=="ded":
             break
+        elif drwd=="cat":
+            ux=randint(2000,3000)
+            uy=randint(0,500)
+            # spI+=1
+            br.sc+=randint(2,4)
         clk.tick(60)
         t+=1
     # deactivates the py library
-    while True:
+    curdler=True
+    while curdler:
         for i in py.event.get():
             if i.type == py.QUIT:
                 py.quit()
+            if i.type == py.MOUSEBUTTONDOWN:
+                curdler=False
