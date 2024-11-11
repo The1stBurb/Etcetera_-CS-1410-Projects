@@ -18,4 +18,3 @@ kb.wait(hotkey="esc")
 # kb.play(rec,speed_factor=100)
 # print("yops")
 # print(kb.read_event())
-# #Rtq rg lqis isj'l igiji ypry iggo!

@@ -1,6 +1,6 @@
 import pygame as py
 import sys
-from random import randint
+from random import randint,choice
 py.init()
 X = 1000
 Y = 1000
@@ -10,8 +10,31 @@ font = py.font.SysFont(None, 50)
 # set the py window name
 py.display.set_caption('image')
 # create a surface object, image is drawn on it.
+def grayscale(surface):
+    width, height = surface.get_size()
+    grayscale_surface = py.Surface((width, height))#,py.SRCALPHA)
+    
+    for x in range(width):
+        for y in range(height):
+            color = surface.get_at((x, y))
+            gray = py.Color(color.r, color.g, color.b,color.a).grayscale()
+            grayscale_surface.set_at((x, y), gray)
+    
+    return grayscale_surface
+def colorize(image, new_color):
+    tinted = py.Surface(image.get_size(), py.SRCALPHA)
+    tinted.fill(new_color)
+    tinted.blit(image, (0, 0), special_flags=py.BLEND_RGBA_MULT)
+    return tinted
+    """
+    Create a "colorized" version of the image.
+    """
+    image = image.copy()
+    image.fill(new_color[0:3] + (0,), special_flags=py.BLEND_RGBA_MULT)
+    return image
 back = py.image.load("flabby bird\\background.png").convert_alpha()
-brd = py.image.load("flabby bird\\bird.png").convert_alpha()
+brd =py.transform.grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()) #colorize(grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()),(255,0,0))
+brd=colorize(brd,(255,0,0))
 grnd = py.image.load("flabby bird\\ground.png").convert_alpha()
 pip = py.image.load("flabby bird\\pipe.png").convert_alpha()
 err=py.image.load("flabby bird\\erer.png").convert_alpha()
@@ -35,7 +58,7 @@ class pipe:
 # scrn.blit(pip, (0, 0))
 # paint screen one time
 def gn(s,xp=0):
-    return pipe(1000+xp,randint(100,620),0,s)
+    return pipe(1000+xp,choice([280,425,562])+randint(-50,50),0,s)#randint(100,620)
 # for i in range(1):
 # pps.append()
 class brrd:
@@ -101,10 +124,6 @@ hs=0
 br=brrd()
 ux=0
 uy=0
-scrn.fill((255,255,255))
-scrn.blit(font.render(f"Press space to fly up. Press left shift to dive more.", True, (0,0,0)),(0,50))
-scrn.blit(font.render(f"press space to continue", True, (0,0,0)),(0,100))
-py.display.flip()
 curdler=True
 while curdler:
     for i in py.event.get():
@@ -112,6 +131,11 @@ while curdler:
             py.quit()
         if i.type == py.MOUSEBUTTONDOWN:
             curdler=False
+    scrn.fill((255,255,255))
+    scrn.blit(font.render(f"Press space to fly up. Press left shift to dive more.", True, (0,0,0)),(0,50))
+    scrn.blit(font.render(f"press space to continue", True, (0,0,0)),(0,100))
+    scrn.blit(font.render(f"Move your mouse to change the color", True, (0,0,0)),(0,150))
+    py.display.flip()
 while run:
     ux=randint(1500,2000)
     uy=randint(0,500)
