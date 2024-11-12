@@ -3,7 +3,7 @@ import sys
 from random import randint,choice
 py.init()
 X = 1000
-Y = 1000
+Y = 999
 scrn = py.display.set_mode((X, Y))
 clk=py.time.Clock()
 font = py.font.SysFont(None, 50)
