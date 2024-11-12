@@ -33,8 +33,8 @@ def colorize(image, new_color):
     image.fill(new_color[0:3] + (0,), special_flags=py.BLEND_RGBA_MULT)
     return image
 back = py.image.load("flabby bird\\background.png").convert_alpha()
-brd =py.transform.grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()) #colorize(grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()),(255,0,0))
-brd=colorize(brd,(255,0,0))
+gbrd =py.transform.grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()) #colorize(grayscale(py.image.load("flabby bird\\bird.png").convert_alpha()),(255,0,0))
+brd=colorize(gbrd,(255,0,0))
 grnd = py.image.load("flabby bird\\ground.png").convert_alpha()
 pip = py.image.load("flabby bird\\pipe.png").convert_alpha()
 err=py.image.load("flabby bird\\erer.png").convert_alpha()
@@ -119,22 +119,37 @@ def drw(rx,ry,spI):
     py.display.flip()
     return "ded" if d else ("cat" if cat else"")
 # py.display.flip()
+def map(value, start1, stop1, start2, stop2):
+    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1))
 run=True
 hs=0
 br=brrd()
 ux=0
 uy=0
 curdler=True
+r=0
+g=0
+b=0
 while curdler:
     for i in py.event.get():
         if i.type == py.QUIT:
             py.quit()
         if i.type == py.MOUSEBUTTONDOWN:
             curdler=False
+    mx,my=py.mouse.get_pos()
+    g=min(255,max(0,map(my,0,1000,0,255)))
+    r=min(255,max(0,map(mx,0,500,0,255)))
+    b=min(255,max(0,map(mx,500,1000,0,255)))
     scrn.fill((255,255,255))
     scrn.blit(font.render(f"Press space to fly up. Press left shift to dive more.", True, (0,0,0)),(0,50))
     scrn.blit(font.render(f"press space to continue", True, (0,0,0)),(0,100))
-    scrn.blit(font.render(f"Move your mouse to change the color", True, (0,0,0)),(0,150))
+    scrn.blit(font.render(f"Move your mouse to change the color,{(int(r),int(g),int(b))}", True, (0,0,0)),(0,150))
+    scrn.blit(brd,(200,200))
+    #bottom is green
+    #left is red
+    #right is blue
+    # print((int(r),int(g),int(b)))
+    brd=colorize(gbrd,(int(r),int(g),int(b)))#py.transform.grayscale(brd)
     py.display.flip()
 while run:
     ux=randint(1500,2000)
