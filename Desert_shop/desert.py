@@ -1,19 +1,5 @@
 
-# Sample Run
-# attribute tax_percent is in DessertItem class
-# method calculate_cost is abstract in DessertItem and concrete in all inheriting subclasses
-# method calculate_tax is concrete in DessertItem and is NOT overrriden in any inheriting subclasses
-# pytest test cases have been created or modified as described above
-# PDF receipt output file should look similar to the sample run shown above
-# Your workspace should have the following 7 files:
-# desserts.py
-# dessertshop.py
-# test_dessert.py
-# test_candy.py
-# test_cookie.py
-# test_icecream.py
-# test_sundae.py
-# This way you don’t end up with one huge test file.
+
 
 from abc import ABC,abstractmethod
 class dsrtItm(ABC):
