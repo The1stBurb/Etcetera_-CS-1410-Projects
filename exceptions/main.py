@@ -6,9 +6,12 @@
 #     print(sakjgdsa)
 # except TypeError:
 #     print("ferg")
+class negNumErr:
+    pass
 def tryr(t):
     try:
         num=int(input(t))
+        raise negNumErr("kjsadg")
     except:
         print("Thats wrong!")
         num=tryr(t)
