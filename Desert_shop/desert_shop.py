@@ -167,7 +167,14 @@ def main():
     #
     #add your code below here to print the PDF receipt as the last thing in main()
     #
-
+    ll=[]
+    for i in ord.ord:
+        ll.append([i.nm,i.cost(),round((i.calctx())*100)/100])
+    ll.append(["Order Subtotals",ord.ordcst(),ord.ordtx()])
+    ll.append(["Order Total",ord.ordcst()+ord.ordtx(),""])
+    ll.append(["Total items in order","",len(ord.ord)])
+    # print(ll)
+    maker(ll,"ord.pdf")
 main()
 # Name	Item Cost	Tax
 # Candy Corn	$0.38	$0.03
