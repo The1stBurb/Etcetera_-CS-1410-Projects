@@ -12,6 +12,77 @@ items=[
     iceCream("Vanilla", 3, .69),
     cookie("Oatmeal Raisin", 2, 3.45),
 ]
+class desShop():
+    def __init__(self):
+        pass
+    def user_prompt_cookie(self):
+        nm=input("What kind of cookie do you want? ")
+        am=0
+        while True:
+            am=input("How many dozens? ")
+            if am.isdigit():
+                am=float(am)
+                break
+        pr=0
+        while True:
+            pr=input("How is the price per dozen? ")
+            if pr.isdigit():
+                pr=float(pr)
+                break
+        return cookie(nm,am,pr)
+    def user_prompt_candy(self):
+        nm=input("What kind of CANDY do you want? ")
+        am=0
+        while True:
+            am=input("How many pounds? ")
+            if am.isdigit():
+                am=float(am)
+                break
+        pr=0
+        while True:
+            pr=input("How is the price per pound? ")
+            if pr.isdigit():
+                pr=float(pr)
+                break
+        return candy(nm,am,pr)
+    def user_prompt_icecream(self):
+        nm=input("What kind of icecream do you want? ")
+        am=0
+        while True:
+            am=input("How many scoops? ")
+            if am.isdigit():
+                am=int(am)
+                break
+        pr=0
+        while True:
+            pr=input("How is the price per scoop? ")
+            if pr.isdigit():
+                pr=float(pr)
+                break
+        return iceCream(nm,am,pr)
+    def user_prompt_sundae(self):
+        nm=input("What kind of icecream do you want? ")
+        am=0
+        while True:
+            am=input("How many scoops? ")
+            if am.isdigit():
+                am=int(am)
+                break
+        pr=0
+        while True:
+            pr=input("How is the price per scoop? ")
+            if pr.isdigit():
+                pr=float(pr)
+                break
+        tp=input("What kind of topping do you want? ")
+        tpr=0
+        while True:
+            tpr=input("How is the price for the topping? ")
+            if tpr.isdigit():
+                tpr=float(tpr)
+                break
+        return sunday(nm,am,pr,tp,tpr)
+    
 class order:
     def __init__(self):
         self.ord=[]
@@ -33,7 +104,7 @@ class order:
         for i in self.ord:
             tp+=i.cost()
         return tp
-def main():
+def main2():
     ord=order()
     # print(ord)
     for i in items:
@@ -48,6 +119,55 @@ def main():
     ll.append(["Total items in order","",len(ord.ord)])
     print(ll)
     maker(ll,"ord.pdf")
+def main():
+    shop = desShop()
+    order = order()
+    '''
+    order.add(Candy('Candy Corn', 1.5, 0.25))
+    order.add(Candy('Gummy Bears', 0.25, 0.35))
+    order.add(Cookie('Chocolate Chip', 6, 3.99))
+    order.add(IceCream('Pistachio', 2, 0.79))
+    order.add(Sundae('Vanilla', 3, 0.69, 'Hot Fudge', 1.29))
+    order.add(Cookie('Oatmeal Raisin', 2, 3.45))
+    '''
+    # boolean done = false
+    done: bool = False
+    # build the prompt string once
+    prompt = '\n'.join([ '\n',
+    '1: Candy',
+    '2: Cookie',
+    '3: Ice Cream',
+    '4: Sunday',
+    '\nWhat would you like to add to the order? (1-4, Enter for done): '
+    ])
+    while not done:
+        choice = input(prompt)
+        match choice:
+            case '':
+                done = True
+            case '1':
+                item = shop.user_prompt_candy()
+                order.add(item)
+                print(f'{item.nm} has been added to your order.')
+            case '2':
+                item = shop.user_prompt_cookie()
+                order.add(item)
+                print(f'{item.nm} has been added to your order.')
+            case '3':
+                item = shop.user_prompt_icecream()
+                order.add(item)
+                print(f'{item.nm} has been added to your order.')
+            case '4':
+                item = shop.user_prompt_sundae()
+                order.add(item)
+                print(f'{item.nm} has been added to your order.')
+            case _:
+                print('Invalid response: Please enter a choice from the menu (1-4) or Enter')
+        print()
+    #
+    #add your code below here to print the PDF receipt as the last thing in main()
+    #
+
 main()
 # Name	Item Cost	Tax
 # Candy Corn	$0.38	$0.03
