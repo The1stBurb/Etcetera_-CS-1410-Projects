@@ -1,7 +1,11 @@
 import mouse as ms
-def wat():
-    print("abj")
-    ms.wait("left","UP")
+def gmp():
+    ms.wait(button="left",target_types="down")
     print(ms.get_position())
-    wat()
-wat()
+    gmp()
+gmp()
+print("###///[[[")
+print("###///[[[")
+print("###///[[[")
+while True:
+    pass
