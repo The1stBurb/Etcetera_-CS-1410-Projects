@@ -83,7 +83,7 @@ class desShop():
                 break
         return sunday(nm,am,pr,tp,tpr)
     
-class order:
+class orderd:
     def __init__(self):
         self.ord=[]
     def add(self,itm):
@@ -105,7 +105,7 @@ class order:
             tp+=i.cost()
         return tp
 def main2():
-    ord=order()
+    ord=orderd()
     # print(ord)
     for i in items:
         ord.add(i)
@@ -121,7 +121,7 @@ def main2():
     maker(ll,"ord.pdf")
 def main():
     shop = desShop()
-    order = order()
+    order = orderd()
     '''
     order.add(Candy('Candy Corn', 1.5, 0.25))
     order.add(Candy('Gummy Bears', 0.25, 0.35))
@@ -167,12 +167,12 @@ def main():
     #
     #add your code below here to print the PDF receipt as the last thing in main()
     #
-    ll=[]
-    for i in ord.ord:
+    ll=[["Name","Price","tax"]]
+    for i in order.ord:
         ll.append([i.nm,i.cost(),round((i.calctx())*100)/100])
-    ll.append(["Order Subtotals",ord.ordcst(),ord.ordtx()])
-    ll.append(["Order Total",ord.ordcst()+ord.ordtx(),""])
-    ll.append(["Total items in order","",len(ord.ord)])
+    ll.append(["Order Subtotals",order.ordcst(),order.ordtx()])
+    ll.append(["Order Total",order.ordcst()+order.ordtx(),""])
+    ll.append(["Total items in order","",len(order.ord)])
     # print(ll)
     maker(ll,"ord.pdf")
 main()

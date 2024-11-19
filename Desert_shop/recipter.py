@@ -11,7 +11,7 @@ def maker(dat,filnm):
     style = TableStyle( 
         [ 
             ( "BOX" , ( 0, 0 ), ( -1, -1 ), 1 , colors.black ), 
-            ( "GRID" , ( 0, 0 ), ( 4 , 4 ), 1 , colors.black ), 
+            ( "GRID" , ( 0, 0 ), ( 4 , len(dat)-4 ), 1 , colors.black ), 
             ( "BACKGROUND" , ( 0, 0 ), ( 3, 0 ), colors.gray ), 
             ( "TEXTCOLOR" , ( 0, 0 ), ( -1, 0 ), colors.whitesmoke ), 
             ( "ALIGN" , ( 0, 0 ), ( -1, -1 ), "CENTER" ), 
