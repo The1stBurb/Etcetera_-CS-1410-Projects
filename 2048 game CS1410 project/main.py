@@ -29,6 +29,7 @@ class board:
                 self.brd[y][x]=c
                 return
     def move(self,d):
+        self.gn()
         mvd=True
         while mvd:
             mvd=False
@@ -81,7 +82,6 @@ class board:
                             else:
                                 pass
             if mvd==False:
-                self.gn()
                 return
     def prnt(self):
         for y,i in enumerate(self.brd):
@@ -90,7 +90,12 @@ class board:
                 if j!=0:
                     prat(2+x*6,3+y*3,j)
         prat(0,14,"is")
+def ip(ky):
+    return keyboard.is_pressed(ky)
 b=board()
+print("Press enter to continue! Anytime you want to end, press \"q\".")
+while True:
+    if 
 print("\033c")
 prat(0,0,""" _____ _____ _____ _____
 |     |     |     |     |
@@ -107,8 +112,6 @@ prat(0,0,""" _____ _____ _____ _____
 |_____|_____|_____|_____|
 """)
 mvr=4
-def ip(ky):
-    return keyboard.is_pressed(ky)
 while True:
     b.move(mvr)
     b.prnt()
