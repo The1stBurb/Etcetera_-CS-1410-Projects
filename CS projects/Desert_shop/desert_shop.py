@@ -91,7 +91,7 @@ class orderd:
         # itm.quan=quan
         self.ord.append(itm)
     def __str__(self):
-        return "\n".join([f"{i.nm}" for i in self.ord])+f"\nTotal number of items in the order: {len(self.ord)}"#{i.quan}x 
+        return "\n".join([str(i) for i in self.ord])+f"\nTotal number of items in the order: {len(self.ord)}"#{i.quan}x 
     def __len___(self):
         return len(self.ord)
     def ordtx(self):
@@ -167,14 +167,19 @@ def main():
     #
     #add your code below here to print the PDF receipt as the last thing in main()
     #
-    ll=[["Name","Price","tax"]]
+    ll=[["Name","Quantity","Unit Price","Cost","Tax"]]
     for i in order.ord:
-        ll.append([i.nm,i.cost(),round((i.calctx())*100)/100])
-    ll.append(["Order Subtotals",order.ordcst(),order.ordtx()])
-    ll.append(["Order Total",order.ordcst()+order.ordtx(),""])
-    ll.append(["Total items in order","",len(order.ord)])
+        if isinstance(i,sunday):
+            ll.append(str[i].split("\n")[0].split(","))
+            ll.append(str[i].split("\n")[1].split(","))
+        else:
+            ll.append(str(i).split(","))
+    ll.append(["Total items in order",len(order.ord),"","",""])
+    ll.append(["Order Subtotals","","",order.ordcst(),order.ordtx()])
+    ll.append(["Order Total","","","",order.ordcst()+order.ordtx()])
     # print(ll)
     maker(ll,"ord.pdf")
+    print(order)
 main()
 # Name	Item Cost	Tax
 # Candy Corn	$0.38	$0.03
