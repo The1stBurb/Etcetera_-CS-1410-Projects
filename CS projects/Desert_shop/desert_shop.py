@@ -91,7 +91,7 @@ class orderd:
         # itm.quan=quan
         self.ord.append(itm)
     def __str__(self):
-        return "\n".join([str(i) for i in self.ord])+f"\nTotal number of items in the order: {len(self.ord)}"#{i.quan}x 
+        return "Name     Amount   Cost Per   Total  Tax\n"+"\n".join([str(i) for i in self.ord])+f"\nTotal number of items in the order: {len(self.ord)}"#{i.quan}x 
     def __len___(self):
         return len(self.ord)
     def ordtx(self):
