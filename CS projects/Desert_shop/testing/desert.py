@@ -3,7 +3,7 @@ from abc import ABC,abstractmethod
 class dsrtItm(ABC):
     def __init__(self,nm,pack):#,nm):
         self.nm=nm
-        self.txp=0.725
+        self.txp=0.0725
         self.packa=paged(pack)
     def __str__(self):
         return f"Type: {self.__class__.__name__}\nName: {self.nm}\nQuantity: {self.quan}\nPrice Per: {self.pp_}"
