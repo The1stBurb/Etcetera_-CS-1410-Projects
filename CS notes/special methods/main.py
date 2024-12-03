@@ -7,10 +7,18 @@ class web:
         self.m=0
     def eat(self):
         print("web")
+    def __lt__(self,ot):
+        return self.m<ot.m
 #prints them, includes parent class methods
 class wab(web):
-    pass
+    def __init__(self):
+        self.m=2
 w=wab()
+a=web()
 print(dir(w),w.__dict__)
+qwr=[w,a]
+print(qwr[0].__class__.__name__,qwr[1].__class__.__name__)
+qwr.sort()
+print(qwr[0].__class__.__name__,qwr[1].__class__.__name__)
 #some are not "methods"
 # __dict__ is just list of attributes(vars in classes)
