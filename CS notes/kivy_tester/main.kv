@@ -25,5 +25,29 @@ BoxLayout:
         max:100
         value:12
         id: slider_slid
+        #on_active: root.switch_callback(self, self.active)
     Switch:
         id: switchy_switcher
+    ProgressBar:
+        id: progress_bar
+        max:10
+        value:1
+    Button:
+        text:"increment"
+        on_press: progress_bar.value+=0.1
+    #Label:
+    #    text:"e"if switch.active else "as"
+    Image:
+        source: "C:\\Users\\eli.cooper\\Documents\\advanced-topics-practice\\CS projects\\flabby bird\\bird.png"
+        allow_stretch: True
+        keep_ratio: True
+#GridLayout: 
+#    cols:3
+#    Button:
+#        text:"sad"
+#loops through cols than restarts
+#FloatLayout:
+    Button:
+        text:"as"
+        size_hint=0.2,0.1
+        position_hint: {"x":0.4,"y":0.4}
