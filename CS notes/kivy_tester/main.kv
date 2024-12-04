@@ -1,0 +1,29 @@
+BoxLayout:
+    orientation: 'vertical'
+
+    Label:
+        text: 'Enter your SSID:'
+
+    TextInput:
+        id: user_input
+        hint_text: "Your ssid! silly human"
+        multiline: False
+
+    Button:
+        text: "Steal"
+        on_press: output_label.text="We have stolen the SSID "+user_input.text+" from you!"
+
+    Label:
+        id: output_label
+        text: "Welcome victim"
+    
+    CheckBox:
+        id: checker_box
+    
+    Slider:
+        min:0
+        max:100
+        value:12
+        id: slider_slid
+    Switch:
+        id: switchy_switcher
