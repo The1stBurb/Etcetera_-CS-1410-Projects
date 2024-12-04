@@ -20,5 +20,6 @@ qwr=[w,a]
 print(qwr[0].__class__.__name__,qwr[1].__class__.__name__)
 qwr.sort()
 print(qwr[0].__class__.__name__,qwr[1].__class__.__name__)
+print(id(w),id(a))
 #some are not "methods"
 # __dict__ is just list of attributes(vars in classes)
