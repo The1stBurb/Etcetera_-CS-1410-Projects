@@ -46,8 +46,21 @@ BoxLayout:
 #    Button:
 #        text:"sad"
 #loops through cols than restarts
-#FloatLayout:
+
+#x/y nums are percetns
+FloatLayout:
     Button:
         text:"as"
         size_hint=0.2,0.1
         position_hint: {"x":0.4,"y":0.4}
+#this manages the screens if multiple
+ScreenManager:
+    id:screen_manager
+    transition:NoTransition()
+    Screen:
+        name:"Home"
+        Button:
+            text:"Sqr"
+            on_press: screen_manager.current="settings_screen"
+    Screen:
+        name:"
